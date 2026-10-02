@@ -1,0 +1,78 @@
+{
+  "name": "querybar",
+  "version": "1.0.0",
+  "description": "GitHub-style search syntax for any app: a fault-tolerant parser, in-memory filter, autocomplete, syntax highlighting and query-editing helpers, all driven by one typed schema. Zero dependencies.",
+  "keywords": [
+    "search",
+    "query",
+    "query-language",
+    "search-syntax",
+    "search-bar",
+    "filter",
+    "parser",
+    "autocomplete",
+    "syntax-highlighting",
+    "qualifiers",
+    "github-search",
+    "facets",
+    "typescript"
+  ],
+  "author": "FillDDak",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FillDDak/querybar.git"
+  },
+  "homepage": "https://github.com/FillDDak/querybar#readme",
+  "bugs": {
+    "url": "https://github.com/FillDDak/querybar/issues"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.cts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.test.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:tz": "node scripts/test-timezones.mjs",
+    "test:dist": "node scripts/smoke-dist.mjs && node scripts/smoke-dist.cjs",
+    "lint:package": "publint --strict && attw --pack .",
+    "playground": "npm run build && node scripts/serve.mjs",
+    "check": "npm run typecheck && npm run test && npm run test:tz && npm run build && npm run test:dist && npm run lint:package",
+    "prepublishOnly": "npm run check"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@vitest/coverage-v8": "^5.0.3",
+    "fast-check": "^4.10.2",
+    "publint": "^0.3.25",
+    "tsup": "^8.5.1",
+    "typescript": "~5.9",
+    "vitest": "^5.0.3"
+  }
+}
