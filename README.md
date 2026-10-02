@@ -1,5 +1,7 @@
 # querybar
 
+**English** | [한국어](./README.ko.md)
+
 **GitHub-style search syntax for any app.** Describe your fields once and get a forgiving parser, an in-memory filter, syntax highlighting, autocomplete, "did you mean" hints and query-editing helpers for filter chips. Zero dependencies, about 11 kB gzipped, fully typed.
 
 ```

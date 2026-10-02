@@ -312,3 +312,23 @@ describe('README: localisation and unicode names', () => {
     expect(s.filter(posts, '작성자:홍길동 상태:open 검색어')).toEqual([posts[0]]);
   });
 });
+
+describe('README translations', () => {
+  it('README.ko.md has exactly the same code as README.md (comments aside)', async () => {
+    // Loaded dynamically: the test tsconfig has no Node type definitions.
+    const fs: { readFileSync(path: URL, encoding: 'utf8'): string } = await import('node:fs' as string);
+    const code = (file: string): string[] => {
+      const text = fs.readFileSync(new URL(`../${file}`, import.meta.url), 'utf8');
+      const blocks: string[] = text.match(/```[a-z]*\n[\s\S]*?```/g) ?? [];
+      // Compare code only: `// …` and shell `# …` comments are translated.
+      return blocks.map((b) =>
+        b
+          .split('\n')
+          .map((line: string) => line.replace(/\s*\/\/.*$/, '').replace(/\s+# .*$/, '').trimEnd())
+          .filter((line: string) => line.trim() !== '')
+          .join('\n'),
+      );
+    };
+    expect(code('README.ko.md')).toEqual(code('README.md'));
+  });
+});
